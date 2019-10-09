@@ -160,4 +160,5 @@ Feedstock Maintainers
 =====================
 
 * [@adbeda](https://github.com/adbeda/)
+* [@sodre](https://github.com/sodre/)
 
