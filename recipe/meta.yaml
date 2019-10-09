@@ -14,16 +14,20 @@ source:
     sha256: cb19406a35797165fb135a5152c8e6ace17315f892ad5a3d0e13b89ca9aae2cd
 
 build:
-  number: 0
+  number: 1
   script:
     - pushd {{ pkg_src }}
     - dep ensure
+    - patch -p1 -i {{ RECIPE_DIR }}{{ os.sep }}client_secret.patch
+    - go test -v .
     - go install -v .
 
 requirements:
   build:
     - {{ compiler("go") }} >=1.11.3
     - go-dep
+    - patch  # [unix]
+    - m2-patch  # [win]
 
 test:
   requires:
@@ -51,3 +55,4 @@ about:
 extra:
   recipe-maintainers:
     - adbeda
+    - sodre
