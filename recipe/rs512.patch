@@ -8,7 +8,7 @@ index 004e45d..b688351 100755
  func NewVerifierRSA(jwk JWK) (*VerifierRSA, error) {
 -	if jwk.Alg != "" && jwk.Alg != "RS256" {
 +    hash := crypto.SHA256
-+	if jwk.Alg == "" && jwk.Alg == "RS256" {
++	if jwk.Alg == "" || jwk.Alg == "RS256" {
 +        hash = crypto.SHA256
 +    } else if jwk.Alg == "RS384" {
 +        hash = crypto.SHA384
