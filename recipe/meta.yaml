@@ -17,11 +17,12 @@ source:
       - access_token.patch
 
 build:
-  number: 2
+  number: 3
   script:
     - pushd {{ pkg_src }}
     - dep ensure
     - patch -p1 -i {{ RECIPE_DIR }}{{ os.sep }}client_secret.patch
+    - patch -p1 -i {{ RECIPE_DIR }}{{ os.sep }}rs512.patch
     - go test -v .
     - go install -v .
 
