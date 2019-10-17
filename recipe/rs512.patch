@@ -32,7 +32,7 @@ index 004e45d..b688351 100755
  
  func (v *VerifierRSA) Alg() string {
 -	return "RS256"
-+    if v.Hash == cryto.SHA512 {
++    if v.Hash == crypto.SHA512 {
 +        return "RS512"
 +    } else if v.Hash == crypto.SHA384 {
 +        return "RS384"
