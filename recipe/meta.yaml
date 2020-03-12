@@ -17,7 +17,7 @@ source:
       - access_token.patch
 
 build:
-  number: 3
+  number: 4
   script:
     - pushd {{ pkg_src }}
     - dep ensure
@@ -60,3 +60,5 @@ extra:
   recipe-maintainers:
     - adbeda
     - sodre
+    - rluria14
+    - oblute
