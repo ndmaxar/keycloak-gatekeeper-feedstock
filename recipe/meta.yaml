@@ -24,8 +24,8 @@ build:
     - echo "ls ROOT"
     - ls
     # - dep ensure
-    - patch -p1 -i {{ RECIPE_DIR }}{{ os.sep }}client_secret.patch
-    - patch -p1 -i {{ RECIPE_DIR }}{{ os.sep }}rs512.patch
+    # - patch -p1 -i {{ RECIPE_DIR }}{{ os.sep }}client_secret.patch
+    # - patch -p1 -i {{ RECIPE_DIR }}{{ os.sep }}rs512.patch
     - go build -v .
     # - go test -v .
 
