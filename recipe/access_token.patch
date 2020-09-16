@@ -1,9 +1,18 @@
+From 3f7c680a1c435c5da5624dd90f6f498513343171 Mon Sep 17 00:00:00 2001
+From: ndana <nathan.dana@radiantsolutions.com>
+Date: Wed, 16 Sep 2020 11:16:54 -0600
+Subject: [PATCH] new
+
+---
+ handlers.go | 18 +++++++++---------
+ 1 file changed, 9 insertions(+), 9 deletions(-)
+
 diff --git a/handlers.go b/handlers.go
-index 5c5ab09..bd2faa4 100644
+index 87b55b7..f7b987f 100644
 --- a/handlers.go
 +++ b/handlers.go
-@@ -131,21 +131,23 @@ func (r *oauthProxy) oauthCallbackHandler(w http.ResponseWriter, req *http.Reque
- 		r.log.Error("unable to parse id token for identity", zap.Error(err))
+@@ -120,6 +120,10 @@ func (r *oauthProxy) oauthCallbackHandler(w http.ResponseWriter, req *http.Reque
+ 		r.log.Error("unable to exchange code for access token", zap.Error(err))
  		r.accessForbidden(w, req)
  		return
 +	} else if err = verifyToken(r.client, token); err != nil {
@@ -11,13 +20,16 @@ index 5c5ab09..bd2faa4 100644
 +		r.accessForbidden(w, req)
 +		return
  	}
-+
-+	// step: check the access token is valid
+ 
+ 	// Flow: once we exchange the authorization code we parse the ID Token; we then check for an access token,
+@@ -140,19 +144,15 @@ func (r *oauthProxy) oauthCallbackHandler(w http.ResponseWriter, req *http.Reque
+ 	}
+ 
  	access, id, err := parseToken(resp.AccessToken)
 -	if err == nil {
 +	if err != nil {
 +		r.log.Warn("unable to parse the access token, using id token only", zap.Error(err))
-+    } else if err = verifyToken(r.client, access); err != nil {
++	} else if err = verifyToken(r.client, access); err != nil {
 +		r.log.Warn("unable to verify the access token, using id token only", zap.Error(err))
 +	} else {
  		token = access
@@ -35,3 +47,6 @@ index 5c5ab09..bd2faa4 100644
  	accessToken := token.Encode()
  
  	// step: are we encrypting the access token?
+-- 
+2.28.0
+
