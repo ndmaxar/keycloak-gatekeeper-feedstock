@@ -23,6 +23,10 @@ build:
     # - pushd {{ pkg_src }}
     - make
     - make test
+    - echo "ls ROOT"
+    - ls
+    - echo "ls bin"
+    - ls bin
     # - echo "ls ROOT"
     # - ls
     # - dep ensure
