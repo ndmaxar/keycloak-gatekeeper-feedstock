@@ -20,13 +20,13 @@ source:
 build:
   number: 4
   script:
-    # - pushd {{ pkg_src }}
     - make
     - make test
     - echo "ls ROOT"
     - ls
     - echo "ls bin"
     - ls bin
+    # - pushd {{ pkg_src }}
     # - echo "ls ROOT"
     # - ls
     # - dep ensure
@@ -37,15 +37,14 @@ build:
 
 requirements:
   build:
-    - {{ compiler("go") }} >=1.11.3
+    - {{ compiler("go") }}
     - make
-    - go-dep
-    - patch  # [unix]
-    - m2-patch  # [win]
+    # - patch  # [unix]
+    # - m2-patch  # [win]
 
 test:
-  requires:
-    - m2-bash  # [win]
+  # requires:
+  #   - m2-bash  # [win]
   source_files:
     - bin/
   commands:
