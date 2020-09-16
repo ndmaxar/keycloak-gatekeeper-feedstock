@@ -21,12 +21,14 @@ build:
   number: 4
   script:
     - pushd {{ pkg_src }}
-    - echo "ls ROOT"
-    - ls
+    - make
+    - make test
+    # - echo "ls ROOT"
+    # - ls
     # - dep ensure
     # - patch -p1 -i {{ RECIPE_DIR }}{{ os.sep }}client_secret.patch
     # - patch -p1 -i {{ RECIPE_DIR }}{{ os.sep }}rs512.patch
-    - go build -v .
+    # - go build -v .
     # - go test -v .
 
 requirements:
@@ -40,7 +42,7 @@ test:
   requires:
     - m2-bash  # [win]
   commands:
-    - bash -c "{{ name|lower }} -v"
+    - bash -c "bin/louketo-proxy -v"
 
 about:
   home: https://github.com/keycloak/keycloak-gatekeeper
