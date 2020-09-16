@@ -46,6 +46,8 @@ requirements:
 test:
   requires:
     - m2-bash  # [win]
+  source_files:
+    - bin/
   commands:
     - bash -c "bin/louketo-proxy -v"
 
