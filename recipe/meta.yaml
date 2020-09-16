@@ -50,7 +50,8 @@ about:
 
   license: Apache 2.0
   license_family: Apache
-  license_file: {{ pkg_src }}/LICENSE
+  # license_file: {{ pkg_src }}/LICENSE
+  license_file: LICENSE
   summary: 'An adapter for use with OpenID Connect that supports both access tokens in a browser cookie or bearer tokens'
 
   description: |
