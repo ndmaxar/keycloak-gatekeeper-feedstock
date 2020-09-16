@@ -1,60 +1,45 @@
-{% set goname = "github.com/keycloak/keycloak-gatekeeper" %}
-{% set version = "2.3.0" %}
+{% set goname = "github.com/louketo/louketo-proxy" %}
+{% set version = "1.0.0" %}
 
-{% set name = goname.split('/')[-1] %}
-{% set pkg_src = ('src/'+goname).replace("/", "\\" if win else "/") %}
+{% set name = "keycloak-gatekeeper" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  - folder: {{ pkg_src }}
-    url: https://{{ goname}}/archive/v{{ version }}.tar.gz
-    sha256: cb19406a35797165fb135a5152c8e6ace17315f892ad5a3d0e13b89ca9aae2cd
-    patches:
-      # Parse and Verify the ID Token before trying to use the access-token
-      - access_token.patch
+  url: https://{{ goname }}/archive/{{ version }}.tar.gz
+  sha256: 6bf29b670b4ab5de577aa419876749cd72a172e02a14d165f156b42bd791ad0b
 
 build:
   number: 4
   script:
-    - pushd {{ pkg_src }}
-    - dep ensure
-    - patch -p1 -i {{ RECIPE_DIR }}{{ os.sep }}client_secret.patch
-    - patch -p1 -i {{ RECIPE_DIR }}{{ os.sep }}rs512.patch
-    - go test -v .
-    - go install -v .
+    - make
 
 requirements:
   build:
-    - {{ compiler("go") }} >=1.11.3
-    - go-dep
-    - patch  # [unix]
-    - m2-patch  # [win]
+    - {{ compiler("go") }}
+    - make
 
 test:
-  requires:
-    - m2-bash  # [win]
+  source_files:
+    - bin/
   commands:
-    - bash -c "{{ name|lower }} -v"
+    - bash -c "bin/louketo-proxy -v"
 
 about:
-  home: https://github.com/keycloak/keycloak-gatekeeper
-
-  license: Apache 2.0
+  home: https://github.com/louketo/louketo-proxy
+  license: Apache-2.0
   license_family: Apache
-  license_file: {{ pkg_src }}/LICENSE
+  license_file: LICENSE
   summary: 'An adapter for use with OpenID Connect that supports both access tokens in a browser cookie or bearer tokens'
-
   description: |
     Keycloak is an open source Identity and Access Management solution aimed
     at modern applications and services. It makes it easy to secure applications
     and services with little to no code. Some of its features include Single-Sign On,
     Identity Brokering and Social Login, User Federation and Client Adapters.
   doc_url: https://www.keycloak.org/docs/latest/securing_apps/index.html#_keycloak_generic_adapter
-
-  dev_url: https://github.com/keycloak/keycloak-gatekeeper
+  dev_url: https://github.com/louketo/louketo-proxy
 
 extra:
   recipe-maintainers:
@@ -62,3 +47,4 @@ extra:
     - sodre
     - rluria14
     - oblute
+    - ndmaxar
