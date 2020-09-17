@@ -12,7 +12,7 @@ source:
   sha256: 6bf29b670b4ab5de577aa419876749cd72a172e02a14d165f156b42bd791ad0b
 
 build:
-  number: 4
+  number: 0
   script:
     - make
 
